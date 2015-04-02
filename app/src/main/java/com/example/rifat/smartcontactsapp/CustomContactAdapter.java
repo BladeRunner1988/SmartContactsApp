@@ -43,12 +43,7 @@ public class CustomContactAdapter extends ArrayAdapter<MyContact> {
 //        holder.ivContact.setImageResource(R.drawable.ic_launcher);
 
         holder.tvContactName.setText(contact.getName());
-
-//        String appendedText = "";
-//        for (String number : contact.getPhoneNumber()) {
-//            appendedText += number + " ";
-//        }
-//        holder.tvContactNumber.setText(appendedText.trim());
+        holder.tvContactNumber.setText(contact.getPhoneNumbers());
 
         return convertView;
     }

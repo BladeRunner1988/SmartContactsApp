@@ -8,13 +8,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Rifat on 3/26/2015.
@@ -27,7 +24,7 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
     private Context mContext;
 
 //    static fields and methods declared here
-    ArrayList<MyContact> myContacts;
+    ArrayList<MyContact> myContacts = new ArrayList<>();
 
 //    Declare constant Strings for database creation and other operations here
     private static final int database_VERSION = 1;
@@ -93,14 +90,14 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
     public void addNewContact(MyContact myContact) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String[] contactNumbers = myContact.getPhoneNumber();
+        String[] contactNumbers = myContact.getPhoneNumberArray();
         String appendedNumbers = "";
         for(int i=0; i<contactNumbers.length; i++) {
             appendedNumbers += contactNumbers[i] + " ";
         }
         appendedNumbers.trim();
 
-        String[] contactEmails = myContact.getEmail();
+        String[] contactEmails = myContact.getEmailIdsArray();
         String appendedEmails = "";
         for(int i=0; i<contactEmails.length; i++) {
             appendedEmails += contactEmails[i] + " ";
@@ -137,9 +134,6 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
         //get reference of MyContact to save data from ContactsContract
         MyContact contact = new MyContact();
 
-        //
-        myContacts = new ArrayList<>();
-
         //insert values through a ContentValues
         ContentValues values = new ContentValues();
 
@@ -174,7 +168,6 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
 
                 String name = cursor.getString(cursor.getColumnIndex(DISPLAY_NAME_PRIMARY));
                 contact.setName(name);
-                values.put(contact_NAME, name); //insert name in ContentValues Object -> values
 
                 int hasPhoneNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex( HAS_PHONE_NUMBER )));
                 String phoneNumber = "";
@@ -185,16 +178,21 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
                     }
                 }
                 phoneCursor.close();
-                phoneNumber.trim();
-                values.put(contact_NUMBERS, phoneNumber); //insert phoneNumbers in ContentValues Object -> values
 
                 String email = "";
                 while (emailCursor.moveToNext()) {
                     email += emailCursor.getString(emailCursor.getColumnIndex(DATA)) + " ";
                 }
                 emailCursor.close();
+
                 email.trim();
-                values.put(contact_EMAILS, email); //insert emailIDs in ContentValues Object -> values
+
+                contact.setPhoneNumbers(phoneNumber);
+                contact.setEmailIds(email);
+
+                values.put(contact_NAME, contact.getName()); //insert name in ContentValues Object -> values
+                values.put(contact_NUMBERS, contact.getPhoneNumbers()); //insert phoneNumbers in ContentValues Object -> values
+                values.put(contact_EMAILS, contact.getEmailIds()); //insert emailIDs in ContentValues Object -> values
 
                 db.insert(database_TABLE, null, values);
             }
@@ -215,7 +213,6 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
     }
 
     public ArrayList<MyContact> getContactsList() {
-        myContacts = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String selectionQuery = "SELECET * FROM " + database_TABLE;
 
@@ -226,10 +223,10 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
                 MyContact myContact = new MyContact();
 
                 myContact.setName("");
-//                myContact.setPhoneNumber(new String[]{});
-                myContact.setEmail(cursor.getString(cursor.getColumnIndex(contact_NUMBERS)).split(" "));
-//                myContact.setEmail(new String[] {});
-                myContact.setEmail(cursor.getString(cursor.getColumnIndex(contact_EMAILS)).split(" "));
+//                myContact.setPhoneNumberArray(new String[]{});
+                myContact.setPhoneNumbers(cursor.getString(cursor.getColumnIndex(contact_NUMBERS)));
+//                myContact.setEmailIdsArray(new String[] {});
+                myContact.setEmailIds(cursor.getString(cursor.getColumnIndex(contact_EMAILS)));
 
                 myContacts.add(myContact);
             }

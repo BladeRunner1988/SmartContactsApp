@@ -1,26 +1,14 @@
 package com.example.rifat.smartcontactsapp;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.format.Time;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener{
@@ -60,8 +48,10 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         MyContact myContact = new MyContact();
 
         myContact.setName("");
-        myContact.setPhoneNumber(new String[]{});
-        myContact.setEmail(new String[]{});
+        //append all phone numbers before passing as parameter
+        myContact.setPhoneNumbers("");
+        //append all emailIds before passing as parameter
+        myContact.setEmailIds("");
 //        myContact.setAddress("");
 //        myContact.setImAlias("");
 //        myContact.setImageLocation("");

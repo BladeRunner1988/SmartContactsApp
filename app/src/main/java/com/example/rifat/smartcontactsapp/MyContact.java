@@ -1,15 +1,15 @@
 package com.example.rifat.smartcontactsapp;
 
-import android.media.Image;
-
 /**
  * Created by Rifat on 3/22/2015.
  */
 public class MyContact {
     //Fields
     private String name;
-    private String[] phoneNumber;
-    private String[] email;
+    private String[] phoneNumberArray;
+    private String phoneNumbers;
+    private String[] emailIdsArray;
+    private String emailIds;
     private String address;
     private String imAlias;
     private String imageLocation;
@@ -28,20 +28,30 @@ public class MyContact {
         this.name = name;
     }
 
-    public String[] getPhoneNumber() {
-        return phoneNumber;
+    public String getPhoneNumbers() {
+        return phoneNumbers;
     }
 
-    public void setPhoneNumber(String[] phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumbers(String phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+        this.phoneNumberArray = phoneNumbers.split(" ");
     }
 
-    public String[] getEmail() {
-        return email;
+    public String[] getPhoneNumberArray() {
+        return phoneNumberArray;
     }
 
-    public void setEmail(String[] email) {
-        this.email = email;
+    public String getEmailIds() {
+        return emailIds;
+    }
+
+    public void setEmailIds(String emailIds) {
+        this.emailIds = emailIds;
+        this.emailIdsArray = emailIds.split(" ");
+    }
+
+    public String[] getEmailIdsArray() {
+        return emailIdsArray;
     }
 
     public String getAddress() {
