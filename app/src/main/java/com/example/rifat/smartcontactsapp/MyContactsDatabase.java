@@ -260,4 +260,21 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
     private String getRelatedContactsEmails() {
         return null;
     }
+
+    public String test() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Log.d("DataBase Version", ""+db.getVersion());
+        Cursor cursor = db.query(database_TABLE, null, null, null, null, null, null);
+        String allData = "";
+        if(cursor.getCount()>0) {
+            while(cursor.moveToNext()) {
+                allData = cursor.getString(cursor.getColumnIndex(contact_NAME)) + "\n"
+                        +cursor.getString(cursor.getColumnIndex(contact_NUMBERS)) +"\n\n";
+            }
+        }else{
+            Toast.makeText(mContext, "No data available", Toast.LENGTH_LONG ).show();
+        }
+        db.close();
+        return allData;
+    }
 }

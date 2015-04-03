@@ -7,10 +7,10 @@
     tools:context="com.example.rifat.smartcontactsapp.ContactDetailsActivity">
 
     <TextView
+        android:id="@+id/tvAllData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contact Details"
-        android:textSize="40sp"
-        android:layout_centerInParent="true"/>
+        android:textSize="16sp"/>
 
 </RelativeLayout>

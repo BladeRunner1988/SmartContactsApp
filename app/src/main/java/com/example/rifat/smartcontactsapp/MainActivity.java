@@ -1,22 +1,30 @@
 package com.example.rifat.smartcontactsapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener{
+public class MainActivity extends Activity implements AdapterView.OnItemClickListener{
 
     ListView mContactsListView;
-    List<MyContact> myPopulatedContacts;
+    EditText etInputSearch;
+    static List<MyContact> myPopulatedContacts;
     CustomContactAdapter customContactAdapter;
 
     @Override
@@ -28,8 +36,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     }
 
     private void init() {
-        mContactsListView = (ListView) findViewById(R.id.myContactList);
-
         new SyncAllPhoneContactsInAppDB().execute(this);
         try {
             Thread.sleep(1000);
@@ -37,8 +43,44 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             e.printStackTrace();
         }
 
-        customContactAdapter = new CustomContactAdapter(this, myPopulatedContacts);
+        final List<MyContact> sortedContacts = new ArrayList<>(myPopulatedContacts);
+        Collections.sort(sortedContacts, new ContactNameSorter());
+
+        mContactsListView = (ListView) findViewById(R.id.myContactList);
+        etInputSearch = (EditText) findViewById(R.id.etInputSearch);
+
+        customContactAdapter = new CustomContactAdapter(getApplicationContext(), sortedContacts);
         mContactsListView.setAdapter(customContactAdapter);
+
+        etInputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int textlength = s.length();
+                List<MyContact> tempArrayList = new ArrayList<>();
+                for(MyContact contact: sortedContacts){
+                    if (textlength <= contact.getName().length()) {
+                        if (contact.getName().toLowerCase().contains(s.toString().toLowerCase())) {
+                            tempArrayList.add(contact);
+                        }
+                    }
+                }
+                customContactAdapter = new CustomContactAdapter(getApplicationContext(), tempArrayList);
+                mContactsListView.setAdapter(customContactAdapter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+//        customContactAdapter = new CustomContactAdapter(this, R.id.etInputSearch, sortedContacts);
+//        mContactsListView.setAdapter(customContactAdapter);
         mContactsListView.setOnItemClickListener(this);
     }
 

@@ -16,6 +16,7 @@ import java.util.List;
 public class CustomContactAdapter extends ArrayAdapter<MyContact> {
 
     LayoutInflater inflater;
+
     public CustomContactAdapter(Context context, List<MyContact> objects) {
         super(context, 0, objects);
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -30,8 +31,8 @@ public class CustomContactAdapter extends ArrayAdapter<MyContact> {
             holder = new ViewHolder();
             holder.ivContact = (ImageView) convertView.findViewById(R.id.ivContact);
             holder.tvContactName = (TextView) convertView.findViewById(R.id.tvContactName);
-            holder.tvContactNumber = (TextView) convertView.findViewById(R.id.tvContactNumber);
-            holder.tvEmailAddress = (TextView) convertView.findViewById(R.id.tvEmailAddress);
+//            holder.tvContactNumber = (TextView) convertView.findViewById(R.id.tvContactNumber);
+//            holder.tvEmailAddress = (TextView) convertView.findViewById(R.id.tvEmailAddress);
 
             convertView.setTag(holder);
         } else {
@@ -39,10 +40,10 @@ public class CustomContactAdapter extends ArrayAdapter<MyContact> {
         }
 
         MyContact contact = getItem(position);
-        holder.ivContact.setImageResource(R.drawable.ic_launcher);
         holder.tvContactName.setText(contact.getName());
-        holder.tvContactNumber.setText(contact.getPhoneNumbers());
-        holder.tvEmailAddress.setText(contact.getEmailIds());
+        holder.ivContact.setImageResource(R.drawable.ic_launcher);
+//        holder.tvContactNumber.setText(contact.getPhoneNumbers());
+//        holder.tvEmailAddress.setText(contact.getEmailIds());
 
         return convertView;
     }
@@ -50,7 +51,7 @@ public class CustomContactAdapter extends ArrayAdapter<MyContact> {
     static class ViewHolder {
         public ImageView ivContact;
         public TextView tvContactName;
-        public TextView tvContactNumber;
-        public TextView tvEmailAddress;
+//        public TextView tvContactNumber;
+//        public TextView tvEmailAddress;
     }
 }

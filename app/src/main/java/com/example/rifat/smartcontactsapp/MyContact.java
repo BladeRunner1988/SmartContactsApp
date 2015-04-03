@@ -1,10 +1,14 @@
 package com.example.rifat.smartcontactsapp;
 
+import java.util.Comparator;
+
 /**
  * Created by Rifat on 3/22/2015.
  */
 public class MyContact {
+
     //Fields
+    private String databaseID;
     private String name;
     private String[] phoneNumberArray;
     private String phoneNumbers;
@@ -19,6 +23,14 @@ public class MyContact {
     private boolean fromTwitterContact;
     private MyNote note;
     //Fields
+
+    public String getDatabaseID() {
+        return databaseID;
+    }
+
+    public void setDatabaseID(String databaseID) {
+        this.databaseID = databaseID;
+    }
 
     public String getName() {
         return name;

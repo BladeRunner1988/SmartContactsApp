@@ -4,14 +4,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class ContactDetailsActivity extends ActionBarActivity {
+
+    TextView tvAllData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_details);
+
+        tvAllData = (TextView) findViewById(R.id.tvAllData);
+
+        MyContactsDatabase myContactsDatabase = new MyContactsDatabase(this);
+        String allData = myContactsDatabase.test();
+        tvAllData.setText(allData);
     }
 
 
