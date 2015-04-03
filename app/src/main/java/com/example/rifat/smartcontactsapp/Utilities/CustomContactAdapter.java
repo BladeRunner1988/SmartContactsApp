@@ -1,4 +1,4 @@
-package com.example.rifat.smartcontactsapp;
+package com.example.rifat.smartcontactsapp.Utilities;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.rifat.smartcontactsapp.R;
 
 import java.util.List;
 

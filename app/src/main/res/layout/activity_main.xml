@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:orientation="vertical"
-    tools:context="com.example.rifat.smartcontactsapp.MainActivity">
+    tools:context="com.example.rifat.smartcontactsapp.Activities.MainActivity">
 
     <EditText
         android:id="@+id/etInputSearch"

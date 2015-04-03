@@ -1,4 +1,4 @@
-package com.example.rifat.smartcontactsapp;
+package com.example.rifat.smartcontactsapp.Utilities;
 
 
 import android.content.ContentResolver;
