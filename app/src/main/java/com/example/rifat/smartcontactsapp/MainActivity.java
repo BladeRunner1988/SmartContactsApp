@@ -1,5 +1,6 @@
 package com.example.rifat.smartcontactsapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -9,15 +10,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener{
 
     ListView mContactsListView;
-    public ArrayList<MyContact> myPopulatedContacts = new ArrayList<>();
+    List<MyContact> myPopulatedContacts;
     CustomContactAdapter customContactAdapter;
-
-    MyContactsDatabase myContactsDatabase = new MyContactsDatabase(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +29,17 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
     private void init() {
         mContactsListView = (ListView) findViewById(R.id.myContactList);
-        mContactsListView.setOnItemClickListener(this);
 
-//        new SyncAllPhoneContactsInAppDB().execute();
-//        new GetContactsListFromAppDB().execute();
+        new SyncAllPhoneContactsInAppDB().execute(this);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         customContactAdapter = new CustomContactAdapter(this, myPopulatedContacts);
         mContactsListView.setAdapter(customContactAdapter);
+        mContactsListView.setOnItemClickListener(this);
     }
 
     @Override
@@ -44,7 +48,18 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         startActivity(intent);
     }
 
+    public class SyncAllPhoneContactsInAppDB extends AsyncTask<Context, Void, Void> {
+        @Override
+        protected Void doInBackground(Context... params) {
+            MyContactsDatabase myContactsDatabase = new MyContactsDatabase(params[0]);
+            myPopulatedContacts = myContactsDatabase.syncAllPhoneContactInAppDB();
+            return null;
+        }
+    }
+
     public void addNewContact() {
+        MyContactsDatabase myContactsDatabase = new MyContactsDatabase(this);
+
         MyContact myContact = new MyContact();
 
         myContact.setName("");
@@ -69,21 +84,5 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         myPopulatedContacts.add(myContact);
         customContactAdapter.notifyDataSetChanged();
         myContactsDatabase.addNewContact(myContact);
-    }
-
-    public class SyncAllPhoneContactsInAppDB extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            myContactsDatabase.syncAllPhoneContactInAppDB();
-            return null;
-        }
-    }
-
-    public class GetContactsListFromAppDB extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            myPopulatedContacts = myContactsDatabase.getContactsList();
-            return null;
-        }
     }
 }

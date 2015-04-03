@@ -4,14 +4,17 @@ package com.example.rifat.smartcontactsapp;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Rifat on 3/26/2015.
@@ -24,7 +27,7 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
     private Context mContext;
 
 //    static fields and methods declared here
-    ArrayList<MyContact> myContacts = new ArrayList<>();
+    List<MyContact> myContacts = new ArrayList<>();
 
 //    Declare constant Strings for database creation and other operations here
     private static final int database_VERSION = 1;
@@ -127,12 +130,10 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
 //        values.put(contact_NOTE_TIME, myContact.getNote().getTime());
     }
 
-    public void syncAllPhoneContactInAppDB() {
+    public List<MyContact> syncAllPhoneContactInAppDB() {
+        Log.d("Async1", "Accessed");
         //get reference of the Connections database
         SQLiteDatabase db = this.getWritableDatabase();
-
-        //get reference of MyContact to save data from ContactsContract
-        MyContact contact = new MyContact();
 
         //insert values through a ContentValues
         ContentValues values = new ContentValues();
@@ -153,38 +154,46 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
 
         //Get phone contact details from ContactsContract in a Cursor
         ContentResolver contentResolver = mContext.getContentResolver();
-
         Cursor cursor = contentResolver.query(CONTENT_URI, null, null, null, null);
-        Cursor phoneCursor;
-        Cursor emailCursor;
+
+
 
         //populate database with all phone contact information
         if(cursor.getCount() > 0) {
             while(cursor.moveToNext()) {
-                phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, null, null, null);
-                emailCursor = contentResolver.query(EmailCONTENT_URI, null, null, null, null);
-
+                MyContact contact = new MyContact();
                 String contact_id = cursor.getString(cursor.getColumnIndex(_ID));
-
                 String name = cursor.getString(cursor.getColumnIndex(DISPLAY_NAME_PRIMARY));
                 contact.setName(name);
 
+                Cursor phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, null, null, null);
                 int hasPhoneNumber = Integer.parseInt(cursor.getString(cursor.getColumnIndex( HAS_PHONE_NUMBER )));
                 String phoneNumber = "";
                 if(hasPhoneNumber > 0) {
-                    phoneCursor = contentResolver.query(PhoneCONTENT_URI, null, Phone_CONTACT_ID + " = ?", new String[] { contact_id }, null);
+                    phoneCursor = contentResolver.query(
+                            PhoneCONTENT_URI,
+                            null, Phone_CONTACT_ID + " = ?",
+                            new String[] { contact_id },
+                            null);
                     while (phoneCursor.moveToNext()) {
                         phoneNumber += phoneCursor.getString(phoneCursor.getColumnIndex(NUMBER)) + " ";
                     }
                 }
                 phoneCursor.close();
 
+                Cursor emailCursor = contentResolver.query(
+                        EmailCONTENT_URI,
+                        null,
+                        EmailCONTACT_ID+ " = ?",
+                        new String[] { contact_id },
+                        null);
                 String email = "";
                 while (emailCursor.moveToNext()) {
                     email += emailCursor.getString(emailCursor.getColumnIndex(DATA)) + " ";
                 }
                 emailCursor.close();
 
+                phoneNumber.trim();
                 email.trim();
 
                 contact.setPhoneNumbers(phoneNumber);
@@ -194,11 +203,13 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
                 values.put(contact_NUMBERS, contact.getPhoneNumbers()); //insert phoneNumbers in ContentValues Object -> values
                 values.put(contact_EMAILS, contact.getEmailIds()); //insert emailIDs in ContentValues Object -> values
 
+                myContacts.add(contact);
                 db.insert(database_TABLE, null, values);
             }
         } else {
             Toast.makeText(mContext, "Sorry!!!\nNo Contacts Database Found.", Toast.LENGTH_LONG).show();
         }
+        cursor.close();
         db.close();
 
 //        values.put(contact_ADDRESS, getRelatedContactsAddress());
@@ -210,30 +221,31 @@ public class MyContactsDatabase extends SQLiteOpenHelper {
 //        values.put(contact_FROM_TWITTER, "is this contact info from Twitter? set true/false");
 //
 //        long newRowID = db.insert(database_TABLE, nullColumnHack, values);
+        return myContacts;
     }
 
-    public ArrayList<MyContact> getContactsList() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String selectionQuery = "SELECET * FROM " + database_TABLE;
-
-        Cursor cursor = db.rawQuery(selectionQuery, null);
-
-        if(cursor.moveToFirst()) {
-            while (cursor.moveToNext()) {
-                MyContact myContact = new MyContact();
-
-                myContact.setName("");
-//                myContact.setPhoneNumberArray(new String[]{});
-                myContact.setPhoneNumbers(cursor.getString(cursor.getColumnIndex(contact_NUMBERS)));
-//                myContact.setEmailIdsArray(new String[] {});
-                myContact.setEmailIds(cursor.getString(cursor.getColumnIndex(contact_EMAILS)));
-
-                myContacts.add(myContact);
-            }
-        }
-        db.close();
-
+    public List<MyContact> getContactsList() {
+        Log.d("Async2", "Accessed");
         return myContacts;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String selectionQuery = "SELECET * FROM " + database_TABLE;
+//
+//        Cursor cursor = db.rawQuery(selectionQuery, null);
+//
+//        if(cursor.moveToFirst()) {
+//            while (cursor.moveToNext()) {
+//                MyContact myContact = new MyContact();
+//
+//                myContact.setName("");
+////                myContact.setPhoneNumberArray(new String[]{});
+//                myContact.setPhoneNumbers(cursor.getString(cursor.getColumnIndex(contact_NUMBERS)));
+////                myContact.setEmailIdsArray(new String[] {});
+//                myContact.setEmailIds(cursor.getString(cursor.getColumnIndex(contact_EMAILS)));
+//
+//                myContacts.add(myContact);
+//            }
+//        }
+//        db.close();
     }
 
     private String getRelatedContactsAddress() {
