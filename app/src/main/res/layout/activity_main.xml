@@ -19,8 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        android:background="#000000"
-        android:divider="@drawable/listview_divider"></ListView>
+        android:background="#000000"></ListView>
 
 
 </LinearLayout>
