@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
+    android:background="#ff8f18d0"
     android:orientation="vertical"
     tools:context="com.example.rifat.smartcontactsapp.Activities.MainActivity">
 
@@ -9,12 +10,17 @@
         android:id="@+id/etInputSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search Contact"
-        android:inputType="text"/>
+        android:hint="Search Contact..."
+        android:inputType="text"
+        android:background="#000000"/>
 
     <ListView
         android:id="@+id/myContactList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:background="#000000"
+        android:divider="@drawable/listview_divider"></ListView>
+
 
 </LinearLayout>

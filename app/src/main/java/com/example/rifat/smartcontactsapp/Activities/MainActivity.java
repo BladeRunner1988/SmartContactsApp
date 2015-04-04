@@ -28,8 +28,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     ListView mContactsListView;
     EditText etInputSearch;
-    static List<MyContact> myPopulatedContacts;
     CustomContactAdapter customContactAdapter;
+
+    public static List<MyContact> myPopulatedContacts;
+    public static MyContact clickedContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        clickedContact = (MyContact) parent.getAdapter().getItem(position);
+
         Intent intent = new Intent(this, ContactDetailsActivity.class);
         startActivity(intent);
     }
