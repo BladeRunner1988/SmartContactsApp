@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.example.rifat.smartcontactsapp.Utilities.MyContactsDatabase;
 import com.example.rifat.smartcontactsapp.R;
@@ -24,8 +24,12 @@ import java.util.List;
 public class ContactDetailsActivity extends ActionBarActivity implements PopupMenu.OnMenuItemClickListener {
 
     ListView lvContactNumbersDetails;
+    ListView lvEmailsDetails;
     List<String> myContactList;
+    List<String> myEmailIDList;
+
     private static String selectedNumber;
+    private static String selectedEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +38,6 @@ public class ContactDetailsActivity extends ActionBarActivity implements PopupMe
 
         init();
 
-
-
         MyContactsDatabase myContactsDatabase = new MyContactsDatabase(this);
         String allData = myContactsDatabase.test();
 
@@ -43,40 +45,58 @@ public class ContactDetailsActivity extends ActionBarActivity implements PopupMe
 
     private void init() {
         lvContactNumbersDetails = (ListView) findViewById(R.id.lvContactNumbersDetails);
+        lvEmailsDetails = (ListView) findViewById(R.id.lvEmailsDetails);
 
         myContactList = Arrays.asList(MainActivity.clickedContact.getPhoneNumberArray());
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        myEmailIDList = Arrays.asList(MainActivity.clickedContact.getEmailIdsArray());
+        ArrayAdapter<String> numbersAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
                 myContactList);
 
-        lvContactNumbersDetails.setAdapter(adapter);
+        ArrayAdapter<String> emailsAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                myContactList);
+
+        lvContactNumbersDetails.setAdapter(numbersAdapter);
+        lvEmailsDetails.setAdapter(emailsAdapter);
 
         lvContactNumbersDetails.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedNumber = myContactList.get(position);
-                showPopup(view);
+                showCallSMSPopup(view);
+            }
+        });
+
+        lvEmailsDetails.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedEmail = myContactList.get(position);
+                showEmailPopUp(view);
             }
         });
 
         registerForContextMenu(lvContactNumbersDetails);
+        registerForContextMenu(lvEmailsDetails);
     }
 
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        menu.setHeaderTitle("Select");
-    }
-
-    public void showPopup(View v) {
+    public void showCallSMSPopup(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.pop_up_menu, popup.getMenu());
+        popup.show();
+    }
+
+    public void showEmailPopUp(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.pop_up_email_menu, popup.getMenu());
         popup.show();
     }
 
@@ -85,51 +105,39 @@ public class ContactDetailsActivity extends ActionBarActivity implements PopupMe
         int clickedItemID = item.getItemId();
         switch (clickedItemID) {
             case R.id.makeCall:
-//                String uri = "tel:" + myContactList.get(position);
-//                Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse(uri));
-//                startActivity(callIntent);
+                makeCall();
                 break;
             case R.id.sendSMS:
+                sendSMS();
+                break;
+            case R.id.sendEmail:
+                sendEmail();
                 break;
         }
         return true;
     }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        int clickedItemID = item.getItemId();
-        switch (clickedItemID) {
-            case R.id.makeCall:
-                String uri = "tel:" + selectedNumber;
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(uri)));
-                break;
-            case R.id.sendSMS:
-                String number = "12346556";  // The number on which you want to send SMS
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));
-                break;
-        }
-        return super.onContextItemSelected(item);
+    private void makeCall() {
+        String uri = "tel:" + selectedNumber;
+        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(uri)));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_contact_details, menu);
-        return true;
+    private void sendSMS() {
+        String number = selectedNumber;  // The number on which you want to send SMS
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    private void sendEmail() {
+        Intent email = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
+        email.setType("message/rfc822");
+        email.putExtra(Intent.EXTRA_EMAIL, selectedEmail);
+        try {
+            // the user can choose the email client
+            startActivity(Intent.createChooser(email, "Choose an email client from..."));
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "No email client installed.",
+                    Toast.LENGTH_LONG).show();
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

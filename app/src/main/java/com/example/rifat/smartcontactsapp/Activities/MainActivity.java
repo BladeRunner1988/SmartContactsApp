@@ -33,6 +33,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public static List<MyContact> myPopulatedContacts;
     public static MyContact clickedContact;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
