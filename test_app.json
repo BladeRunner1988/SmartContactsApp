@@ -24,11 +24,7 @@
                 "left": "10",
                 "color":"#000000"
               }
-            },
-            "style": {
-              "background": "rgba(0,0,0,0)",
-              "color": "#ffffff"
-            },
+            },            
             "menu": {
               "text": "View JSON",
               "href": {
