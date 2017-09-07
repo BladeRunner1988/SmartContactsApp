@@ -1,76 +1,75 @@
 {
   "$jason": {
     "head": {
-      "title":"কৃষকের জানালা",
-      "description":"This app helps farmers identify crop related problems and provide solutions",
-      "offline":"true/yes/on",
-      "body": {
-        "header": {
-          "style": {
-            "shy": "true"
-          },
-          "title": "কৃষকের জানালা",
-          "menu": {
-            "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
-          },
-          "menu": {
-            "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
-          },
-          "menu": {
-            "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
-          }
-        },
-        "sections": [
-          {
-            "items": [
-              {
-                "type": "label",
-                "text": "Item 1"
-              },
-              {
-                "type": "label",
-                "text": "Item 2"
-              },
-              {
-                "type": "label",
-                "text": "Item 3"
-              },
-              {
-                "type": "label",
-                "text": "Item 4"
-              },
-              {
-                "type": "label",
-                "text": "Item 5"
-              }
-            ]
-          }
-        ],
-        "footer": {
-          "tabs": {
+      "templates": {
+        "body": {
+          "header": {
             "style": {
-              "background": "rgba(255,255,255,0)",
-              "color": "#000000"
+              "shy": "true"
             },
-            "items": [{
-              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/camera.png",
+            "title": "কৃষকের জানালা",
+            "menu": {
+              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
+            },
+            "menu": {
+              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
+            },
+            "menu": {
+              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
+            }
+          },
+          "sections": [
+            {
+              "items": [
+                {
+                  "type": "label",
+                  "text": "Item 1"
+                },
+                {
+                  "type": "label",
+                  "text": "Item 2"
+                },
+                {
+                  "type": "label",
+                  "text": "Item 3"
+                },
+                {
+                  "type": "label",
+                  "text": "Item 4"
+                },
+                {
+                  "type": "label",
+                  "text": "Item 5"
+                }
+              ]
+            }
+          ],
+          "footer": {
+            "tabs": {
               "style": {
-                "height": "21"
+                "background": "rgba(255,255,255,0)",
+                "color": "#000000"
               },
-              "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/camera.json"
-            }, {
-              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/heart.png",
-              "style": {
-                "height": "21"
-              },
-              "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/heart.json"
-            }, {
-              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/profile.png",
-              "style": {
-                "height": "21"
-              },
-              "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/profile.json"
-            }]
+              "items": [{
+                "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/camera.png",
+                "style": {
+                  "height": "21"
+                },
+                "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/camera.json"
+              }, {
+                "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/heart.png",
+                "style": {
+                  "height": "21"
+                },
+                "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/heart.json"
+              }, {
+                "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/profile.png",
+                "style": {
+                  "height": "21"
+                },
+                "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/profile.json"
+              }]
+            }
           }
         }
       }
