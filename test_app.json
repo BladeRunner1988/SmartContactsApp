@@ -1,0 +1,57 @@
+{
+  "$jason": {
+    "head": {
+      "title":"কৃষকের জানালা",
+      "description":"This app helps farmers identify crop related problems and provide solutions",
+      "offline":"true/yes/on",
+      "body": {
+        "header": {
+          "style": {
+            "shy": "true"
+          },
+          "title": "কৃষকের জানালা",
+          "menu": {
+            "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
+          },
+          "menu": {
+            "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
+          },
+          "menu": {
+            "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
+          }
+        },
+        "sections": [
+        ],
+        "layers": [
+        ],
+        "footer": {
+          "tabs": {
+            "style": {
+              "background": "rgba(255,255,255,0)",
+              "color": "#000000"
+            },
+            "items": [{
+              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/camera.png",
+              "style": {
+                "height": "21"
+              },
+              "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/camera.json"
+            }, {
+              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/heart.png",
+              "style": {
+                "height": "21"
+              },
+              "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/heart.json"
+            }, {
+              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/profile.png",
+              "style": {
+                "height": "21"
+              },
+              "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/profile.json"
+            }]
+          }
+        }
+      }
+    }
+  }
+}
