@@ -42,20 +42,7 @@
                 {
                   "type": "label",
                   "text": "Item 1"
-                },
-                {
-                  "type": "vertical",
-                  "components": [
-                    {
-                      "type": "label",
-                      "text": "John"
-                    },
-                    {
-                      "type": "label",
-                      "text": "Doe"
-                    }
-                  ]
-                },
+                },                
                 {
                   "type": "label",
                   "text": "Item 4"
