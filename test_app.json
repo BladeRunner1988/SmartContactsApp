@@ -26,7 +26,7 @@
               }
             },            
             "menu": {
-              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
+              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png",
               "href": {
                 "url": "https://github.com/Jasonette/Jasonpedia/view/background/index.json",
                 "view": "web"
