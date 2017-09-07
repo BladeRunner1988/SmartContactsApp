@@ -6,7 +6,7 @@
         "$load": {
           "type": "$set",
           "options": {
-            "bg": "#fffef9"
+            "bg": "#ededed"
           },
           "success": {
             "type": "$render"
@@ -22,177 +22,426 @@
               "style": {
                 "align": "left",
                 "left": "10",
-                "color":"#000000"
+                "color": "#000000"
               }
-            },            
+            },
             "menu": {
               "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png",
               "href": {
                 "url": "https://github.com/Jasonette/Jasonpedia/view/background/index.json",
                 "view": "web"
-              }              
+              }
+            },
+            "menu": {
+              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png",
+              "href": {
+                "url": "https://github.com/Jasonette/Jasonpedia/view/background/index.json",
+                "view": "web"
+              }
+            },
+            "menu": {
+              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png",
+              "href": {
+                "url": "https://github.com/Jasonette/Jasonpedia/view/background/index.json",
+                "view": "web"
+              }
+            },
+            "style": {
+              "background": "#00af52",
+              "color": "#ffffff"
             }
           },
           "style": {
             "background": "{{$get.bg}}"
           },
           "sections": [
-            {    
+            {
               "items": [
                 {
-                  "type": "label",
-                  "text": "Item 1"
-                },                
+                  "type": "horizontal",
+                  "components": [
+                    {
+                      "type": "label",
+                      "text": "মাঠ ফসল",
+                      "style": {
+                        "background": "rgba(255,255,255,1)",
+                        "color": "#3d8c35",
+                        "align": "center",
+                        "left": "20",
+                        "padding": "50",
+                        "font": "HelveticaNeue-Bold"
+                      },
+                      "action": {
+                        "type": "$set",
+                        "options": {
+                          "bg": {
+                            "type": "camera",
+                            "options": {
+                              "device": "back"
+                            }
+                          }
+                        },
+                        "success": {
+                          "type": "$render"
+                        }
+                      }
+                    },
+                    {
+                      "type": "space",
+                      "style": {
+                        "width": "5"
+                      }
+                    },
+                    {
+                      "type": "label",
+                      "text": "ফল",
+                      "style": {
+                        "background": "rgba(255,255,255,1)",
+                        "color": "#3d8c35",
+                        "align": "center",
+                        "right": "20",
+                        "padding": "50",
+                        "font": "HelveticaNeue-Bold"
+                      },
+                      "action": {
+                        "type": "$set",
+                        "options": {
+                          "bg": {
+                            "type": "camera",
+                            "options": {
+                              "device": "back"
+                            }
+                          }
+                        },
+                        "success": {
+                          "type": "$render"
+                        }
+                      }
+                    }
+                  ]
+                },
                 {
-                  "type": "label",
-                  "text": "Item 4"
+                  "type": "horizontal",
+                  "components": [
+                    {
+                      "type": "label",
+                      "text": "ফুল",
+                      "style": {
+                        "background": "rgba(255,255,255,1)",
+                        "color": "#3d8c35",
+                        "align": "center",
+                        "left": "20",
+                        "padding": "50",
+                        "font": "HelveticaNeue-Bold"
+                      },
+                      "action": {
+                        "type": "$set",
+                        "options": {
+                          "bg": {
+                            "type": "camera",
+                            "options": {
+                              "device": "back"
+                            }
+                          }
+                        },
+                        "success": {
+                          "type": "$render"
+                        }
+                      }
+                    },
+                    {
+                      "type": "space",
+                      "style": {
+                        "width": "5"
+                      }
+                    },
+                    {
+                      "type": "label",
+                      "text": "শাক-সব্জি",
+                      "style": {
+                        "background": "rgba(255,255,255,1)",
+                        "color": "#3d8c35",
+                        "align": "center",
+                        "right": "20",
+                        "padding": "50",
+                        "font": "HelveticaNeue-Bold"
+                      },
+                      "action": {
+                        "type": "$set",
+                        "options": {
+                          "bg": {
+                            "type": "camera",
+                            "options": {
+                              "device": "back"
+                            }
+                          }
+                        },
+                        "success": {
+                          "type": "$render"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "horizontal",
+                  "components": [
+                    {
+                      "type": "label",
+                      "text": "মসলা",
+                      "style": {
+                        "background": "rgba(255,255,255,1)",
+                        "color": "#3d8c35",
+                        "align": "center",
+                        "left": "20",
+                        "padding": "50",
+                        "font": "HelveticaNeue-Bold"
+                      },
+                      "action": {
+                        "type": "$set",
+                        "options": {
+                          "bg": {
+                            "type": "camera",
+                            "options": {
+                              "device": "back"
+                            }
+                          }
+                        },
+                        "success": {
+                          "type": "$render"
+                        }
+                      }
+                    },
+                    {
+                      "type": "space",
+                      "style": {
+                        "width": "5"
+                      }
+                    },
+                    {
+                      "type": "label",
+                      "text": "অন্যান্য ফসল",
+                      "style": {
+                        "background": "rgba(255,255,255,1)",
+                        "color": "#3d8c35",
+                        "align": "center",
+                        "right": "20",
+                        "padding": "50",
+                        "font": "HelveticaNeue-Bold"
+                      },
+                      "action": {
+                        "type": "$set",
+                        "options": {
+                          "bg": {
+                            "type": "camera",
+                            "options": {
+                              "device": "back"
+                            }
+                          }
+                        },
+                        "success": {
+                          "type": "$render"
+                        }
+                      }
+                    }
+                  ]
                 },
                 {
                   "type": "label",
-                  "text": "Item 5"
+                  "text": "সমস্যা জমাদিন",
+                  "style": {
+                    "background": "rgba(255,255,255,1)",
+                    "color": "#3d8c35",
+                    "align": "center",
+                    "right": "20",
+                    "left": "20",
+                    "padding": "15",
+                    "font": "HelveticaNeue-Bold"
+                  },
+                  "action": {
+                    "type": "$set",
+                    "options": {
+                      "bg": {
+                        "type": "camera",
+                        "options": {
+                          "device": "back"
+                        }
+                      }
+                    },
+                    "success": {
+                      "type": "$render"
+                    }
+                  }
                 }
               ]
             }
           ],
-          "layers": [
-            {
-              "type": "button",
-              "url": "https://s3.amazonaws.com/www.textcast.co/icons/camera%402x.png",
+//          "layers": [
+//            {
+//              "type": "button",
+//              "url": "https://s3.amazonaws.com/www.textcast.co/icons/camera%402x.png",
+//              "style": {
+//                "left": "20",
+//                "bottom": "20",
+//                "width": "30",
+//                "height": "30",
+//                "color": "#ffffff"
+//              },
+//              "action": {
+//                "type": "$snapshot",
+//                "success": {
+//                  "type": "$util.share",
+//                  "options": {
+//                    "items": [
+//                      {
+//                        "type": "image",
+//                        "data": "{{$jason.data}}"
+//                      }
+//                    ]
+//                  }
+//                }
+//              }
+//            },
+//            {
+//              "type": "label",
+//              "text": "Red",
+//              "style": {
+//                "background": "rgba(0,0,0,0.7)",
+//                "color": "#ff0000",
+//                "padding": "10",
+//                "right": "20",
+//                "font": "HelveticaNeue-Bold",
+//                "bottom": "220"
+//              },
+//              "action": {
+//                "type": "$set",
+//                "options": {
+//                  "bg": "#ff0000"
+//                },
+//                "success": {
+//                  "type": "$render"
+//                }
+//              }
+//            },
+//            {
+//              "type": "label",
+//              "text": "Green",
+//              "style": {
+//                "background": "rgba(0,0,0,0.7)",
+//                "color": "#00ff00",
+//                "padding": "10",
+//                "right": "20",
+//                "font": "HelveticaNeue-Bold",
+//                "bottom": "170"
+//              },
+//              "action": {
+//                "type": "$set",
+//                "options": {
+//                  "bg": "#00ff00"
+//                },
+//                "success": {
+//                  "type": "$render"
+//                }
+//              }
+//            },
+//            {
+//              "type": "label",
+//              "text": "Cat",
+//              "style": {
+//                "background": "rgba(0,0,0,0.7)",
+//                "color": "#ffffff",
+//                "right": "20",
+//                "padding": "10",
+//                "font": "HelveticaNeue-Bold",
+//                "bottom": "120"
+//              },
+//              "action": {
+//                "type": "$set",
+//                "options": {
+//                  "bg": "http://i.giphy.com/Is0AJv4CEj9hm.gif"
+//                },
+//                "success": {
+//                  "type": "$render"
+//                }
+//              }
+//            },
+//            {
+//              "type": "label",
+//              "text": "Camera",
+//              "style": {
+//                "background": "rgba(0,0,0,0.7)",
+//                "color": "#ffffff",
+//                "right": "20",
+//                "padding": "10",
+//                "font": "HelveticaNeue-Bold",
+//                "bottom": "70"
+//              },
+//              "action": {
+//                "type": "$set",
+//                "options": {
+//                  "bg": {
+//                    "type": "camera",
+//                    "options": {
+//                      "device": "back"
+//                    }
+//                  }
+//                },
+//                "success": {
+//                  "type": "$render"
+//                }
+//              }
+//            },
+//            {
+//              "type": "label",
+//              "text": "Mirror",
+//              "style": {
+//                "background": "rgba(0,0,0,0.7)",
+//                "color": "#ffffff",
+//                "right": "20",
+//                "padding": "10",
+//                "font": "HelveticaNeue-Bold",
+//                "bottom": "20"
+//              },
+//              "action": {
+//                "type": "$set",
+//                "options": {
+//                  "bg": {
+//                    "type": "camera"
+//                  }
+//                },
+//                "success": {
+//                  "type": "$render"
+//                }
+//              }
+//            }
+//          ]
+          "footer": {
+            "tabs": {
               "style": {
-                "left": "20",
-                "bottom": "20",
-                "width": "30",
-                "height": "30",
-                "color": "#ffffff"
+                "background": "rgba(255,255,255,0.8)",
+                "color": "#000000"
               },
-              "action": {
-                "type": "$snapshot",
-                "success": {
-                  "type": "$util.share",
-                  "options": {
-                    "items": [
-                      {
-                        "type": "image",
-                        "data": "{{$jason.data}}"
-                      }
-                    ]
-                  }
-                }
-              }
-            },
-            {
-              "type": "label",
-              "text": "Red",
-              "style": {
-                "background": "rgba(0,0,0,0.7)",
-                "color": "#ff0000",
-                "padding": "10",
-                "right": "20",
-                "font": "HelveticaNeue-Bold",
-                "bottom": "220"
-              },
-              "action": {
-                "type": "$set",
-                "options": {
-                  "bg": "#ff0000"
+              "items": [{
+                "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/camera.png",
+                "style": {
+                  "height": "21"
                 },
-                "success": {
-                  "type": "$render"
-                }
-              }
-            },
-            {
-              "type": "label",
-              "text": "Green",
-              "style": {
-                "background": "rgba(0,0,0,0.7)",
-                "color": "#00ff00",
-                "padding": "10",
-                "right": "20",
-                "font": "HelveticaNeue-Bold",
-                "bottom": "170"
-              },
-              "action": {
-                "type": "$set",
-                "options": {
-                  "bg": "#00ff00"
+                "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/camera.json"
+              }, {
+                "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/heart.png",
+                "style": {
+                  "height": "21"
                 },
-                "success": {
-                  "type": "$render"
-                }
-              }
-            },
-            {
-              "type": "label",
-              "text": "Cat",
-              "style": {
-                "background": "rgba(0,0,0,0.7)",
-                "color": "#ffffff",
-                "right": "20",
-                "padding": "10",
-                "font": "HelveticaNeue-Bold",
-                "bottom": "120"
-              },
-              "action": {
-                "type": "$set",
-                "options": {
-                  "bg": "http://i.giphy.com/Is0AJv4CEj9hm.gif"
+                "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/heart.json"
+              }, {
+                "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/profile.png",
+                "style": {
+                  "height": "21"
                 },
-                "success": {
-                  "type": "$render"
-                }
-              }
-            },
-            {
-              "type": "label",
-              "text": "Camera",
-              "style": {
-                "background": "rgba(0,0,0,0.7)",
-                "color": "#ffffff",
-                "right": "20",
-                "padding": "10",
-                "font": "HelveticaNeue-Bold",
-                "bottom": "70"
-              },
-              "action": {
-                "type": "$set",
-                "options": {
-                  "bg": {
-                    "type": "camera",
-                    "options": {
-                      "device": "back"
-                    }
-                  }
-                },
-                "success": {
-                  "type": "$render"
-                }
-              }
-            },
-            {
-              "type": "label",
-              "text": "Mirror",
-              "style": {
-                "background": "rgba(0,0,0,0.7)",
-                "color": "#ffffff",
-                "right": "20",
-                "padding": "10",
-                "font": "HelveticaNeue-Bold",
-                "bottom": "20"
-              },
-              "action": {
-                "type": "$set",
-                "options": {
-                  "bg": {
-                    "type": "camera"
-                  }
-                },
-                "success": {
-                  "type": "$render"
-                }
-              }
+                "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/profile.json"
+              }]
             }
-          ]
+          }
         }
       }
     }
