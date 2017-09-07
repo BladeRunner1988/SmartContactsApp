@@ -16,7 +16,15 @@
       "templates": {
         "body": {
           "header": {
-            "title": "কৃষকের জানালা",
+            "title": {
+             "type": "label",
+              "text": "কৃষকের জানালা",
+              "style": {
+                "align": "left",
+                "left": "10",
+                "color":"#000000"
+              },
+            },
             "style": {
               "background": "rgba(0,0,0,0)",
               "color": "#ffffff"
@@ -28,7 +36,7 @@
                 "view": "web"
               },
               "style": {
-                "color": "#ffffff"
+                "color": "#000000"
               }
             }
           },
