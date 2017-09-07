@@ -17,7 +17,7 @@
         "body": {
           "header": {
             "title": {
-             "type": "label",
+              "type": "label",
               "text": "কৃষকের জানালা",
               "style": {
                 "align": "left",
