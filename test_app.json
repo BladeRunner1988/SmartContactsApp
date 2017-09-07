@@ -5,17 +5,12 @@
         "body": {
           "header": {
             "style": {
-              "shy": "true"
+              "background": "rgba(0,0,0,0)",
+              "color": "#ffffff"
             },
             "title": "কৃষকের জানালা",
             "menu": {
-              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
-            },
-            "menu": {
-              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
-            },
-            "menu": {
-              "image": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/images/box.png"
+              "text": "Menu1"
             }
           },
           "sections": [
